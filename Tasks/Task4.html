@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./Style4.css">
+</head>
+<body>
+    <form class="calculator">
+        <h1>Calculator</h1>
+        <div class="display">
+            <label for="output" id="output">Output</label>
+            <input type="text" id="input" readonly>
+        </div>
+        <div class="buttons">
+            <div class="row">
+                <button type="button" class="cal clear">CA</button>
+                <button type="button" class="cal equals">=</button>
+            </div>
+            <div class="row">
+                <button type="button" class="cal">1</button>
+                <button type="button" class="cal">2</button>
+                <button type="button" class="cal">3</button>
+                <button type="button" class="cal operator">+</button>
+            </div>
+            <div class="row">
+                <button type="button" class="cal">4</button>
+                <button type="button" class="cal">5</button>
+                <button type="button" class="cal">6</button>
+                <button type="button" class="cal operator">-</button>
+            </div>
+            <div class="row">
+                <button type="button" class="cal">7</button>
+                <button type="button" class="cal">8</button>
+                <button type="button" class="cal">9</button>
+                <button type="button" class="cal operator">*</button>
+            </div>
+            <div class="row">
+                <button type="button" class="cal">0</button>
+                <button type="button" class="cal">00</button>
+                <button type="button" class="cal">.</button>
+                <button type="button" class="cal operator">/</button>
+            </div>
+        </div>
+    </form>
+
+</form>
+</body>
+    <script>
+        const inputfield = document.getElementById('input');   
+        const button = document.querySelectorAll('.cal');
+        let  express = "";
+
+    function solve(expr){
+        try{
+            const res = new Function('return' + expr)();
+            return res.toString();
+        }catch(err){
+           return 'Error';
+        }
+    }
+    button.forEach(button =>{
+        button.addEventListener('click' ,() =>{
+            const value = button.textContent.trim();
+            if(value === 'CA'){
+                express = " ";
+            }else if(value === '='){
+               try{
+                   express = eval(express).toString();
+               } catch {
+                express = "Error";
+               } 
+            } else {
+                express += value;
+            }
+            inputfield.value = express;
+        });
+    });
+
+</script>
+
+</html>
